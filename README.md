@@ -57,6 +57,28 @@ ops, body-as-blob invariant). The private reference implementation is
 gftdcojp's `ai-gftd-syosetsuka` actor (ADR-2607023000: コードは kotoba-lang、
 職能は cloud-itonami-isco、商売は gftdcojp).
 
+## Reference actor (`:maturity :implemented`)
+
+Full itonami Actor pattern (like
+[`cloud-itonami-isco-6130`](https://github.com/cloud-itonami/cloud-itonami-isco-6130) /
+[`-2652`](https://github.com/cloud-itonami/cloud-itonami-isco-2652)): a real
+[`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgraph)
+`StateGraph` with Advisor and Governor as distinct nodes and human-in-the-loop
+interrupt/resume. The governor enforces the
+[`kotoba-lang/shousetsu`](https://github.com/kotoba-lang/shousetsu)
+**body-as-blob invariant as a HARD invariant** (an inline `:body` is
+structurally refused — long-form text never becomes a datom), and episode
+commits carry shousetsu-built entity ids and datom ops
+(`episode-meta->ops` → `:ep/bodyBlobKey`).
+
+- HARD → `:hold`: unregistered work, non-`:propose` effect, inline body.
+- ESCALATE → `:request-approval` (human-signed): reprint licensing, publish
+  without an uploaded body blob, low confidence.
+
+```bash
+clojure -M:test
+```
+
 See [`docs/business-model.md`](docs/business-model.md) and
 [`docs/operator-guide.md`](docs/operator-guide.md).
 
