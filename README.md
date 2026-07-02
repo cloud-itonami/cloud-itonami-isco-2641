@@ -50,10 +50,12 @@ Resolves via [`kotoba-lang/occupation`](https://github.com/kotoba-lang/occupatio
 - :bpmn
 - :audit-ledger
 
-Craft libraries: none published yet for the writing domain — the private
-reference implementation is gftdcojp's `ai-gftd-syosetsuka` actor
-(ADR-2607023000: コードは kotoba-lang、職能は cloud-itonami-isco、商売は
-gftdcojp).
+Craft library (public, kotoba-lang):
+[`shousetsu`](https://github.com/kotoba-lang/shousetsu) — work-agnostic
+serialized web-fiction vocabulary (author/work/episode entity scheme, datom
+ops, body-as-blob invariant). The private reference implementation is
+gftdcojp's `ai-gftd-syosetsuka` actor (ADR-2607023000: コードは kotoba-lang、
+職能は cloud-itonami-isco、商売は gftdcojp).
 
 See [`docs/business-model.md`](docs/business-model.md) and
 [`docs/operator-guide.md`](docs/operator-guide.md).

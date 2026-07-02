@@ -7,5 +7,5 @@
  :itonami.blueprint/governor :writing-governor
  :itonami.blueprint/robotics true
  :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
- :itonami.blueprint/craft-libraries []
+ :itonami.blueprint/craft-libraries ["kotoba-lang/shousetsu"]
  :itonami.blueprint/status :public-oss}
