@@ -1,5 +1,5 @@
 (ns writing-practice.actor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [writing-practice.actor :as actor]
             [writing-practice.store :as store]))
 
@@ -20,8 +20,8 @@
       (is (= "episode:reincarnated-librarian:3" (:episode-id record)))
       (testing "committed datom ops keep the body as a blob key"
         (let [flat (pr-str (:tx-ops record))]
-          (is (clojure.string/includes? flat ":ep/bodyBlobKey"))
-          (is (not (clojure.string/includes? flat ":ep/body "))))))
+          (is (kotoba.lang.text/includes? flat ":ep/bodyBlobKey"))
+          (is (not (kotoba.lang.text/includes? flat ":ep/body "))))))
     (is (= 1 (count (store/records-of st "work:reincarnated-librarian"))))))
 
 (deftest holds-inline-body-without-committing
