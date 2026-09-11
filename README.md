@@ -76,7 +76,7 @@ commits carry shousetsu-built entity ids and datom ops
   without an uploaded body blob, low confidence.
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 See [`docs/business-model.md`](docs/business-model.md) and
