@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a print-and-fulfilment robot performs physical
+;; proof printing, binding and shipment handling for authors and related
+;; writers (ISCO 2641). Its physical work is lifting stacks of bound proofs
+;; off the binder into a shipping carton, and carting the cartons to the
+;; shipping dock.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2641"
+ :cases
+ [{:id :pack-proofs-into-carton
+   :kind :manipulator
+   :procedure "arm lifts a stack of bound proof copies off the binder delivery table and lowers it into a shipping carton"
+   :params {:l1-m 0.50 :l2-m 0.45 :m1-kg 5.0 :m2-kg 3.5
+            :from [0.65 0.35] :to [0.35 0.05] :duration-s 2.5 :steps 500}
+   :sweep {:param :payload-kg :values [1.0 3.0 5.0 8.0 12.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 90.0 :basis "estimate: continuous shoulder torque of a medium collaborative arm (~10 kg payload class) at this reach"}
+   :boundary {:lo 0.1 :hi 40.0}}
+  {:id :carton-cart-to-dock
+   :kind :transport
+   :procedure "cart robot carries 40 kg of boxed printed books from the bindery to the shipping dock; the bindery-to-dock distance depends on the facility"
+   :params {:mass-kg 80.0 :payload-kg 40.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 0.8 :drive-force-n 150.0 :crr 0.02
+            :cog-height-m 0.70 :support-half-length-m 0.35}
+   :sweep {:param :distance-m :values [20.0 30.0 40.0 60.0 80.0]}
+   :quantity :cycle-time-s
+   :limit {:max 50.0 :basis "estimate: one bindery-to-dock leg that keeps a batch of proofs within the same courier pickup window"}
+   :boundary {:lo 5.0 :hi 200.0}}]}
